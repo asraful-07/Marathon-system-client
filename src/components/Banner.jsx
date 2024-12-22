@@ -31,13 +31,13 @@ export default function Carousel() {
         <SwiperSlide>
           <div className="relative">
             <img
-              src="https://media.istockphoto.com/id/1815508710/photo/collaborative-innovation-business-professionals-crafting-a-new-project.jpg?s=612x612&w=0&k=20&c=2InQGAWxCp_IdFG0IHY16-jEuuCYXhq-XTYS37cI49U="
-              alt="Collaborative Innovation"
+              src="https://runcrew.ancorathemes.com/wp-content/uploads/2016/04/slide1.jpg"
+              alt="Marathon Management"
               className="w-full h-[400px] object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-lg">
-              <h2 className="text-white text-2xl font-bold text-center px-4">
-                Get Your Web Development Projects Done in Minutes
+              <h2 className="text-[#0db496] text-2xl font-bold text-center px-4">
+                Join the Marathon Management System and Register for Events
               </h2>
             </div>
           </div>
@@ -47,13 +47,13 @@ export default function Carousel() {
         <SwiperSlide>
           <div className="relative">
             <img
-              src="https://media.istockphoto.com/id/2160680046/photo/group-of-diverse-people-working-together.jpg?s=612x612&w=0&k=20&c=H7gavHKy4zrTdlEG4VrWDuo6lG5zjwy4A46dF8tNC8U="
+              src="https://runcrew.ancorathemes.com/wp-content/uploads/2016/04/slide2.jpg"
               alt="Diverse Team Collaboration"
               className="w-full h-[400px] object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-lg">
-              <h2 className="text-white text-2xl font-bold text-center px-4">
-                Get Your Graphics Design Projects Done in Minutes
+              <h2 className="text-[#0db496] text-2xl font-bold text-center px-4">
+                Manage Your Marathon Participation Seamlessly
               </h2>
             </div>
           </div>
@@ -63,13 +63,13 @@ export default function Carousel() {
         <SwiperSlide>
           <div className="relative">
             <img
-              src="https://media.istockphoto.com/id/989329380/photo/tough-questions-at-the-meeting.jpg?s=612x612&w=0&k=20&c=cigL5IIFBnoNSqIT6byYZZg7k3XU-Nc01a1CDqQyhaU="
+              src="https://runcrew.ancorathemes.com/wp-content/uploads/2016/04/slide3.jpg"
               alt="Strategic Discussion"
               className="w-full h-[400px] object-cover shadow-lg"
             />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-lg">
-              <h2 className="text-white text-2xl font-bold text-center px-4">
-                Start Your Digital Marketing Campaigns Up and Running
+              <h2 className="text-[#0db496] text-2xl font-bold text-center px-4">
+                Register, Track, and Manage Your Marathons Efficiently
               </h2>
             </div>
           </div>
