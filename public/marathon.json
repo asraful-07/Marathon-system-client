@@ -1,0 +1,110 @@
+[
+  {
+    "title": "City Marathon Challenge",
+    "startRegistrationDate": "2024-01-10",
+    "endRegistrationDate": "2024-01-25",
+    "marathonStartDate": "2024-02-01",
+    "location": "Dhaka, Bangladesh",
+    "runningDistance": "25k",
+    "description": "A thrilling marathon through the bustling streets of Dhaka. Join us for a day of excitement and endurance.",
+    "image": "https://example.com/images/marathon1.jpg",
+    "createdAt": "2024-01-01T10:00:00Z",
+    "totalRegistrations": 0,
+    "aiSuggestion": "Challenge yourself with this mega marathon event.",
+    "creator": {
+      "email": "creator1@example.com",
+      "name": "John Doe",
+      "photo": "https://example.com/images/user1.jpg"
+    }
+  },
+  {
+    "title": "Spring Fun Run",
+    "startRegistrationDate": "2024-03-01",
+    "endRegistrationDate": "2024-03-15",
+    "marathonStartDate": "2024-03-20",
+    "location": "Chittagong, Bangladesh",
+    "runningDistance": "10k",
+    "description": "Enjoy the fresh spring air with this fun run for all ages.",
+    "image": "https://example.com/images/marathon2.jpg",
+    "createdAt": "2024-02-20T08:00:00Z",
+    "totalRegistrations": 0,
+    "aiSuggestion": "Perfect for families and beginner runners.",
+    "creator": {
+      "email": "creator2@example.com",
+      "name": "Jane Smith",
+      "photo": "https://example.com/images/user2.jpg"
+    }
+  },
+  {
+    "title": "Beachside Dash",
+    "startRegistrationDate": "2024-05-01",
+    "endRegistrationDate": "2024-05-15",
+    "marathonStartDate": "2024-05-20",
+    "location": "Cox's Bazar, Bangladesh",
+    "runningDistance": "3k",
+    "description": "A short and scenic dash along the beautiful Cox's Bazar beach.",
+    "image": "https://example.com/images/marathon3.jpg",
+    "createdAt": "2024-04-25T12:00:00Z",
+    "totalRegistrations": 0,
+    "aiSuggestion": "Great for first-time runners.",
+    "creator": {
+      "email": "creator3@example.com",
+      "name": "Alice Brown",
+      "photo": "https://example.com/images/user3.jpg"
+    }
+  },
+  {
+    "title": "Hill Climb Adventure",
+    "startRegistrationDate": "2024-06-10",
+    "endRegistrationDate": "2024-06-20",
+    "marathonStartDate": "2024-06-25",
+    "location": "Bandarban, Bangladesh",
+    "runningDistance": "10k",
+    "description": "Test your limits with this challenging hill climb marathon.",
+    "image": "https://example.com/images/marathon4.jpg",
+    "createdAt": "2024-06-01T15:00:00Z",
+    "totalRegistrations": 0,
+    "aiSuggestion": "Experience the adventure of a lifetime.",
+    "creator": {
+      "email": "creator4@example.com",
+      "name": "Robert Green",
+      "photo": "https://example.com/images/user4.jpg"
+    }
+  },
+  {
+    "title": "Night Glow Run",
+    "startRegistrationDate": "2024-08-01",
+    "endRegistrationDate": "2024-08-15",
+    "marathonStartDate": "2024-08-20",
+    "location": "Sylhet, Bangladesh",
+    "runningDistance": "25k",
+    "description": "Run under the stars in this unique glow-in-the-dark marathon.",
+    "image": "https://example.com/images/marathon5.jpg",
+    "createdAt": "2024-07-25T18:00:00Z",
+    "totalRegistrations": 0,
+    "aiSuggestion": "A magical experience for night owls.",
+    "creator": {
+      "email": "creator5@example.com",
+      "name": "Emily White",
+      "photo": "https://example.com/images/user5.jpg"
+    }
+  },
+  {
+    "title": "Charity Fun Run",
+    "startRegistrationDate": "2024-09-05",
+    "endRegistrationDate": "2024-09-20",
+    "marathonStartDate": "2024-09-25",
+    "location": "Rajshahi, Bangladesh",
+    "runningDistance": "3k",
+    "description": "Join us to support a good cause with this short and sweet fun run.",
+    "image": "https://example.com/images/marathon6.jpg",
+    "createdAt": "2024-09-01T09:00:00Z",
+    "totalRegistrations": 0,
+    "aiSuggestion": "Run for a cause that matters.",
+    "creator": {
+      "email": "creator6@example.com",
+      "name": "Michael Clark",
+      "photo": "https://example.com/images/user6.jpg"
+    }
+  }
+]

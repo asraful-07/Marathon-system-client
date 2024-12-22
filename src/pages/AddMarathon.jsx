@@ -1,63 +1,57 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const MarathonsPage = () => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [marathonStartDate, setMarathonStartDate] = useState(new Date());
+  const [aiSuggestion, setAiSuggestion] = useState("");
 
-  // If the user is not logged in, redirect to the login page
-  if (!user) {
-    navigate("/login");
-    return null;
-  }
-
-  // State for marathon details form
-  const [marathon, setMarathon] = useState({
-    title: "",
-    startRegistrationDate: new Date(),
-    endRegistrationDate: new Date(),
-    marathonStartDate: new Date(),
-    location: "",
-    runningDistance: "25k",
-    description: "",
-    marathonImage: "",
-    createdAt: new Date(),
-    totalRegistrationCount: 0,
-  });
-
-  // Handle form field change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setMarathon((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  // Handle file change for marathon image
-  const handleImageChange = (e) => {
-    setMarathon((prevState) => ({
-      ...prevState,
-      marathonImage: e.target.files[0],
-    }));
-  };
-
-  // Handle date change
-  const handleDateChange = (date, field) => {
-    setMarathon((prevState) => ({
-      ...prevState,
-      [field]: date,
-    }));
-  };
-
-  // Handle form submission (you can adjust this based on your backend setup)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Marathon Event Created:", marathon);
-    // Here you would send the marathon data to your server or Firebase
+    const form = e.target;
+    const title = form.title.value;
+    const image = form.image.value;
+    const location = form.location.value;
+    const runningDistance = form.runningDistance.value;
+    const description = form.description.value;
+
+    const marathonData = {
+      title,
+      startRegistrationDate: startDate,
+      endRegistrationDate: endDate,
+      marathonStartDate,
+      location,
+      runningDistance,
+      description,
+      image,
+      createdAt: new Date(),
+      totalRegistrations: 0,
+      aiSuggestion,
+      creator: {
+        email: user?.email,
+        name: user?.displayName,
+        photo: user?.photoURL,
+      },
+    };
+
+    try {
+      const { data } = await axios.post(
+        `http://localhost:5000/marathons`,
+        marathonData
+      );
+
+      console.log(data);
+      toast.success("Marathon Event Created Successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to create marathon event.");
+    }
   };
 
   return (
@@ -75,10 +69,21 @@ const MarathonsPage = () => {
           <input
             type="text"
             name="title"
-            value={marathon.title}
-            onChange={handleChange}
             className="w-full mt-2 px-4 py-2 border rounded"
             required
+          />
+        </div>
+
+        {/* AI Suggestion */}
+        <div className="mb-4">
+          <label className="block text-lg font-medium">AI Suggestion</label>
+          <input
+            type="text"
+            name="aiSuggestion"
+            value={aiSuggestion}
+            onChange={(e) => setAiSuggestion(e.target.value)}
+            className="w-full mt-2 px-4 py-2 border rounded"
+            placeholder="Suggestions for marathon name or features"
           />
         </div>
 
@@ -88,11 +93,9 @@ const MarathonsPage = () => {
             Start Registration Date
           </label>
           <DatePicker
-            selected={marathon.startRegistrationDate}
-            onChange={(date) => handleDateChange(date, "startRegistrationDate")}
-            className="w-full mt-2 px-4 py-2 border rounded"
-            dateFormat="MMMM d, yyyy"
-            required
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            className="border p-2 rounded-md"
           />
         </div>
 
@@ -102,8 +105,8 @@ const MarathonsPage = () => {
             End Registration Date
           </label>
           <DatePicker
-            selected={marathon.endRegistrationDate}
-            onChange={(date) => handleDateChange(date, "endRegistrationDate")}
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
             className="w-full mt-2 px-4 py-2 border rounded"
             dateFormat="MMMM d, yyyy"
             required
@@ -116,8 +119,8 @@ const MarathonsPage = () => {
             Marathon Start Date
           </label>
           <DatePicker
-            selected={marathon.marathonStartDate}
-            onChange={(date) => handleDateChange(date, "marathonStartDate")}
+            selected={marathonStartDate}
+            onChange={(date) => setMarathonStartDate(date)}
             className="w-full mt-2 px-4 py-2 border rounded"
             dateFormat="MMMM d, yyyy"
             required
@@ -130,8 +133,6 @@ const MarathonsPage = () => {
           <input
             type="text"
             name="location"
-            value={marathon.location}
-            onChange={handleChange}
             className="w-full mt-2 px-4 py-2 border rounded"
             required
           />
@@ -142,8 +143,6 @@ const MarathonsPage = () => {
           <label className="block text-lg font-medium">Running Distance</label>
           <select
             name="runningDistance"
-            value={marathon.runningDistance}
-            onChange={handleChange}
             className="w-full mt-2 px-4 py-2 border rounded"
             required
           >
@@ -158,8 +157,6 @@ const MarathonsPage = () => {
           <label className="block text-lg font-medium">Description</label>
           <textarea
             name="description"
-            value={marathon.description}
-            onChange={handleChange}
             className="w-full mt-2 px-4 py-2 border rounded"
             rows="4"
             required
@@ -170,10 +167,11 @@ const MarathonsPage = () => {
         <div className="mb-4">
           <label className="block text-lg font-medium">Marathon Image</label>
           <input
-            type="file"
-            onChange={handleImageChange}
-            className="w-full mt-2 px-4 py-2 border rounded"
-            accept="image/*"
+            type="text"
+            name="image"
+            placeholder="Company Image URL"
+            className="input input-bordered w-full"
+            required
           />
         </div>
 
