@@ -69,7 +69,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? "text-[#0db496] font-semibold underline block px-3 py-2"
-                  : "text-gray-600 hover:underline hover:text-[#0db496] block px-3 py-2"
+                  : "text-white hover:underline hover:text-[#0db496] block px-3 py-2"
               }
             >
               {label}
@@ -127,7 +127,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? "text-[#0db496] font-semibold underline block px-3 py-2"
-                  : "text-gray-600 hover:underline hover:text-[#0db496] block px-3 py-2"
+                  : "text-white hover:underline hover:text-[#0db496] block px-3 py-2"
               }
             >
               {label}
