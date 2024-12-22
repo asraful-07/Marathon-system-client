@@ -5,6 +5,9 @@ import Marathons from "../components/Marathons";
 import Dashboard from "../components/Dashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import AddMarathon from "../pages/AddMarathon";
+import MyMarathonList from "../pages/MyMarathonList";
+import MyApplyList from "../pages/MyApplyList";
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +33,19 @@ const routes = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/dashboard/add-marathon",
+        element: <AddMarathon />,
+      },
+
+      {
+        path: "/dashboard/my-marathon-list",
+        element: <MyMarathonList />,
+      },
+      {
+        path: "/dashboard/my-apply-list",
+        element: <MyApplyList />,
       },
     ],
   },

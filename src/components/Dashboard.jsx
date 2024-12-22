@@ -8,7 +8,10 @@ const Dashboard = () => {
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           {/* Page content here */}
-          <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
+          <label
+            htmlFor="my-drawer"
+            className="btn bg-[#0db496] text-white drawer-button"
+          >
             Open drawer
           </label>
         </div>
