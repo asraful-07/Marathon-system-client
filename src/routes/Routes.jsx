@@ -51,8 +51,8 @@ const routes = createBrowserRouter([
       {
         path: "/marathon/:id",
         element: <MarathonDetails />,
-        // loader: ({ params }) =>
-        // fetch(`http://localhost:5000/marathon/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/marathon/${params.id}`),
       },
     ],
   },
