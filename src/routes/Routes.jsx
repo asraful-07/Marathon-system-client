@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import AddMarathon from "../pages/AddMarathon";
 import MyMarathonList from "../pages/MyMarathonList";
 import MyApplyList from "../pages/MyApplyList";
+import MarathonDetails from "../components/MarathonDetails";
 
 const routes = createBrowserRouter([
   {
@@ -46,6 +47,12 @@ const routes = createBrowserRouter([
       {
         path: "/dashboard/my-apply-list",
         element: <MyApplyList />,
+      },
+      {
+        path: "/marathon/:id",
+        element: <MarathonDetails />,
+        // loader: ({ params }) =>
+        // fetch(`http://localhost:5000/marathon/${params.id}`),
       },
     ],
   },

@@ -1,9 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const MarathonCards = ({ marathon }) => {
-  const navigate = useNavigate();
-
   const {
     _id,
     title,
@@ -35,12 +33,11 @@ const MarathonCards = ({ marathon }) => {
         </p>
 
         {/* See Details Button */}
-        <button
-          onClick={() => navigate(`/marathons/${_id}`)}
-          className="w-full py-2 px-4 bg-[#0db496] text-white font-bold rounded-lg hover:bg-[#0a8a72] transition-colors"
-        >
-          See Details
-        </button>
+        <NavLink to={`/marathon/${_id}`}>
+          <button className="w-full py-2 px-4 bg-[#0db496] text-white font-bold rounded-lg hover:bg-[#0a8a72] transition-colors">
+            See Details
+          </button>
+        </NavLink>
       </div>
     </div>
   );
