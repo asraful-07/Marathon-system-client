@@ -4,35 +4,51 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useLoaderData } from "react-router-dom";
 
-const AddMarathon = () => {
+const UpdateMarathon = () => {
+  const marathon = useLoaderData();
+
+  const {
+    _id,
+    title,
+    startRegistrationDate,
+    endRegistrationDate,
+    marathonStartDate,
+    location,
+    runningDistance,
+    description,
+    image,
+    aiSuggestion,
+  } = marathon;
+
   const { user } = useContext(AuthContext);
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [marathonStartDate, setMarathonStartDate] = useState(new Date());
-  const [aiSuggestion, setAiSuggestion] = useState("");
+  const [startDate, setStartDate] = useState(new Date(startRegistrationDate));
+  const [endDate, setEndDate] = useState(new Date(endRegistrationDate));
+  const [marathonStart, setMarathonStart] = useState(
+    new Date(marathonStartDate)
+  );
+  const [aiSuggestionValue, setAiSuggestionValue] = useState(aiSuggestion);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const title = form.title.value;
-    const image = form.image.value;
-    const location = form.location.value;
-    const runningDistance = form.runningDistance.value;
-    const description = form.description.value;
+    const updatedTitle = form.title.value;
+    const updatedImage = form.image.value;
+    const updatedLocation = form.location.value;
+    const updatedRunningDistance = form.runningDistance.value;
+    const updatedDescription = form.description.value;
 
     const marathonData = {
-      title,
+      title: updatedTitle,
       startRegistrationDate: startDate,
       endRegistrationDate: endDate,
-      marathonStartDate,
-      location,
-      runningDistance,
-      description,
-      image,
-      createdAt: new Date(),
-      totalRegistrations: 0,
-      aiSuggestion,
+      marathonStartDate: marathonStart,
+      location: updatedLocation,
+      runningDistance: updatedRunningDistance,
+      description: updatedDescription,
+      image: updatedImage,
+      aiSuggestion: aiSuggestionValue,
       creator: {
         email: user?.email,
         name: user?.displayName,
@@ -41,23 +57,23 @@ const AddMarathon = () => {
     };
 
     try {
-      const { data } = await axios.post(
-        `http://localhost:5000/marathons`,
+      const { data } = await axios.put(
+        `http://localhost:5000/marathon/${_id}`,
         marathonData
       );
 
       console.log(data);
-      toast.success("Marathon Event Created Successfully!");
+      toast.success("Marathon Event Updated Successfully!");
     } catch (err) {
       console.error(err);
-      toast.error("Failed to create marathon event.");
+      toast.error("Failed to update marathon event.");
     }
   };
 
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">
-        Create Marathon Event
+        Update Marathon Event
       </h1>
       <form
         onSubmit={handleSubmit}
@@ -70,6 +86,7 @@ const AddMarathon = () => {
             type="text"
             name="title"
             className="w-full mt-2 px-4 py-2 border rounded"
+            defaultValue={title}
             required
           />
         </div>
@@ -80,8 +97,8 @@ const AddMarathon = () => {
           <input
             type="text"
             name="aiSuggestion"
-            value={aiSuggestion}
-            onChange={(e) => setAiSuggestion(e.target.value)}
+            value={aiSuggestionValue}
+            onChange={(e) => setAiSuggestionValue(e.target.value)}
             className="w-full mt-2 px-4 py-2 border rounded"
             placeholder="Suggestions for marathon name or features"
           />
@@ -119,8 +136,8 @@ const AddMarathon = () => {
             Marathon Start Date
           </label>
           <DatePicker
-            selected={marathonStartDate}
-            onChange={(date) => setMarathonStartDate(date)}
+            selected={marathonStart}
+            onChange={(date) => setMarathonStart(date)}
             className="w-full mt-2 px-4 py-2 border rounded"
             dateFormat="MMMM d, yyyy"
             required
@@ -133,6 +150,7 @@ const AddMarathon = () => {
           <input
             type="text"
             name="location"
+            defaultValue={location}
             className="w-full mt-2 px-4 py-2 border rounded"
             required
           />
@@ -143,6 +161,7 @@ const AddMarathon = () => {
           <label className="block text-lg font-medium">Running Distance</label>
           <select
             name="runningDistance"
+            defaultValue={runningDistance}
             className="w-full mt-2 px-4 py-2 border rounded"
             required
           >
@@ -157,6 +176,7 @@ const AddMarathon = () => {
           <label className="block text-lg font-medium">Description</label>
           <textarea
             name="description"
+            defaultValue={description}
             className="w-full mt-2 px-4 py-2 border rounded"
             rows="4"
             required
@@ -169,7 +189,8 @@ const AddMarathon = () => {
           <input
             type="text"
             name="image"
-            placeholder="Company Image URL"
+            defaultValue={image}
+            placeholder="Marathon Image URL"
             className="input input-bordered w-full"
             required
           />
@@ -180,11 +201,11 @@ const AddMarathon = () => {
           type="submit"
           className="w-full py-3 bg-[#0db496] text-white text-xl font-bold rounded"
         >
-          Create Marathon
+          Update Marathon
         </button>
       </form>
     </div>
   );
 };
 
-export default AddMarathon;
+export default UpdateMarathon;

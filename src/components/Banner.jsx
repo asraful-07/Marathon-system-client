@@ -11,7 +11,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 export default function Carousel() {
   return (
-    <div className="mb-24">
+    <div className="">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

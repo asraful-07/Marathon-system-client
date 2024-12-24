@@ -9,6 +9,8 @@ import AddMarathon from "../pages/AddMarathon";
 import MyMarathonList from "../pages/MyMarathonList";
 import MyApplyList from "../pages/MyApplyList";
 import MarathonDetails from "../components/MarathonDetails";
+import UpdateMarathon from "../pages/UpdateMarathon";
+import ErrorPage from "../pages/ErrorPage";
 
 const routes = createBrowserRouter([
   {
@@ -49,10 +51,20 @@ const routes = createBrowserRouter([
         element: <MyApplyList />,
       },
       {
+        path: "/update/:id",
+        element: <UpdateMarathon />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/marathon/${params.id}`),
+      },
+      {
         path: "/marathon/:id",
         element: <MarathonDetails />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/marathon/${params.id}`),
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
       },
     ],
   },
