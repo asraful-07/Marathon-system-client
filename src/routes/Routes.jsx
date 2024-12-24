@@ -11,6 +11,7 @@ import MyApplyList from "../pages/MyApplyList";
 import MarathonDetails from "../components/MarathonDetails";
 import UpdateMarathon from "../pages/UpdateMarathon";
 import ErrorPage from "../pages/ErrorPage";
+import PrivetRouter from "../PrivetRouter/PrivetRouter";
 
 const routes = createBrowserRouter([
   {
@@ -23,7 +24,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/marathons",
-        element: <Marathons />,
+        element: (
+          <PrivetRouter>
+            <Marathons />
+          </PrivetRouter>
+        ),
       },
       {
         path: "/dashboard",
@@ -39,16 +44,28 @@ const routes = createBrowserRouter([
       },
       {
         path: "/dashboard/add-marathon",
-        element: <AddMarathon />,
+        element: (
+          <PrivetRouter>
+            <AddMarathon />
+          </PrivetRouter>
+        ),
       },
 
       {
         path: "/dashboard/my-marathon-list",
-        element: <MyMarathonList />,
+        element: (
+          <PrivetRouter>
+            <MyMarathonList />
+          </PrivetRouter>
+        ),
       },
       {
         path: "/dashboard/my-apply-list",
-        element: <MyApplyList />,
+        element: (
+          <PrivetRouter>
+            <MyApplyList />
+          </PrivetRouter>
+        ),
       },
       {
         path: "/update/:id",
@@ -58,7 +75,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/marathon/:id",
-        element: <MarathonDetails />,
+        element: (
+          <PrivetRouter>
+            <MarathonDetails />
+          </PrivetRouter>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/marathon/${params.id}`),
       },
