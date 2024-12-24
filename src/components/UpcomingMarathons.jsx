@@ -1,4 +1,3 @@
-// src/components/UpcomingEvents.jsx
 import React from "react";
 
 const events = [
