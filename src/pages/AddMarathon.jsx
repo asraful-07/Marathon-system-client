@@ -45,8 +45,6 @@ const AddMarathon = () => {
         `http://localhost:5000/marathons`,
         marathonData
       );
-
-      console.log(data);
       toast.success("Marathon Event Created Successfully!");
     } catch (err) {
       console.error(err);
