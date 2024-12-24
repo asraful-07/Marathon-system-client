@@ -3,6 +3,7 @@ import Banner from "../components/Banner";
 import Marathons from "../components/Marathons";
 import UpcomingMarathons from "../components/UpcomingMarathons";
 import TestimonialSection from "../components/TestimonialSection";
+import Coaches from "../components/Coaches";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Marathons />
       <UpcomingMarathons />
       <TestimonialSection />
+      <Coaches />
     </div>
   );
 };
