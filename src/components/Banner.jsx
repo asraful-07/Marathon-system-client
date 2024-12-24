@@ -33,9 +33,9 @@ export default function Carousel() {
             <img
               src="https://runcrew.ancorathemes.com/wp-content/uploads/2016/04/slide1.jpg"
               alt="Marathon Management"
-              className="w-full h-[400px] object-cover"
+              className="w-full h-[600px] object-cover"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-lg">
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
               <h2 className="text-[#0db496] text-2xl font-bold text-center px-4">
                 Join the Marathon Management System and Register for Events
               </h2>
@@ -49,9 +49,9 @@ export default function Carousel() {
             <img
               src="https://runcrew.ancorathemes.com/wp-content/uploads/2016/04/slide2.jpg"
               alt="Diverse Team Collaboration"
-              className="w-full h-[400px] object-cover"
+              className="w-full h-[600px] object-cover"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-lg">
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
               <h2 className="text-[#0db496] text-2xl font-bold text-center px-4">
                 Manage Your Marathon Participation Seamlessly
               </h2>
@@ -65,9 +65,9 @@ export default function Carousel() {
             <img
               src="https://runcrew.ancorathemes.com/wp-content/uploads/2016/04/slide3.jpg"
               alt="Strategic Discussion"
-              className="w-full h-[400px] object-cover shadow-lg"
+              className="w-full h-[600px] object-cover shadow-lg"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center rounded-lg">
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
               <h2 className="text-[#0db496] text-2xl font-bold text-center px-4">
                 Register, Track, and Manage Your Marathons Efficiently
               </h2>
