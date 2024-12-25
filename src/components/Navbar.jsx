@@ -16,13 +16,6 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  // Navigation links configuration
-  const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/marathons", label: "Marathons" },
-    { path: "/dashboard", label: "Dashboard" },
-  ];
-
   const themeToggle = (e) => {
     if (e.target.checked) {
       setTheme("dark");
@@ -38,6 +31,14 @@ const Navbar = () => {
   }, [theme]);
 
   const defaultAvatar = "/default-avatar.png";
+
+  // Separate public and private links
+  const publicLinks = [
+    { path: "/", label: "Home" },
+    { path: "/marathons", label: "Marathons" },
+  ];
+
+  const privateLinks = [{ path: "/dashboard", label: "Dashboard" }];
 
   return (
     <nav className="bg-[#383737] shadow-md">
@@ -61,8 +62,8 @@ const Navbar = () => {
             </label>
           </div>
 
-          {/* Navigation Links */}
-          {navLinks?.map(({ path, label }) => (
+          {/* Public Navigation Links */}
+          {publicLinks.map(({ path, label }) => (
             <NavLink
               key={path}
               to={path}
@@ -75,6 +76,22 @@ const Navbar = () => {
               {label}
             </NavLink>
           ))}
+
+          {/* Private Navigation Links (Only if user is logged in) */}
+          {user &&
+            privateLinks.map(({ path, label }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#0db496] font-semibold underline block px-3 py-2"
+                    : "text-white hover:underline hover:text-[#0db496] block px-3 py-2"
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
 
           {/* User Section */}
           {user ? (
@@ -120,7 +137,8 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="lg:hidden bg-[#383737] shadow-lg p-4">
-          {navLinks?.map(({ path, label }) => (
+          {/* Public Navigation Links */}
+          {publicLinks.map(({ path, label }) => (
             <NavLink
               key={path}
               to={path}
@@ -133,6 +151,23 @@ const Navbar = () => {
               {label}
             </NavLink>
           ))}
+
+          {/* Private Navigation Links (Only if user is logged in) */}
+          {user &&
+            privateLinks.map(({ path, label }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#0db496] font-semibold underline block px-3 py-2"
+                    : "text-white hover:underline hover:text-[#0db496] block px-3 py-2"
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+
           {user ? (
             <div className="flex flex-col items-start space-y-4 mt-4">
               <div className="flex items-center space-x-4">

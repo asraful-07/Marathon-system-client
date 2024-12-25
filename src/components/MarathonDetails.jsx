@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import DatePicker from "react-datepicker";
@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 const MarathonDetails = () => {
   const { user } = useContext(AuthContext);
+  const [startDate, setStartDate] = useState(new Date());
   const marathon = useLoaderData();
   const {
     _id,
@@ -27,7 +28,7 @@ const MarathonDetails = () => {
       applyId: _id,
       email: user?.email,
       title: form.marathonTitle.value,
-      // marathonStartDate: form.marathonStartDate.value,
+      marathonStartDate: startDate,
       firstName: form.firstName.value,
       lastName: form.lastName.value,
       contactNumber: form.contactNumber.value,
@@ -104,8 +105,9 @@ const MarathonDetails = () => {
               Marathon Start Date
             </label>
             <DatePicker
-              className="border p-2 rounded-md"
-              selected={new Date(marathonStartDate)}
+              className="border p-2 rounded-md w-full"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
               readOnly
             />
           </div>

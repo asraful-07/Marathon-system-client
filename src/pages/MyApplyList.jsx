@@ -2,28 +2,31 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 import toast from "react-hot-toast";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const MyApplyList = () => {
   const { user } = useContext(AuthContext);
   const [marathons, setMarathons] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const [selectedMarathon, setSelectedMarathon] = useState(null);
+  const [search, setSearch] = useState(""); // State for search input
+
   useEffect(() => {
     if (user) {
       getData();
     }
-  }, [user]);
+  }, [user, search]); // Refetch data when search changes
 
   const getData = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/register/${user?.email}`
+        `http://localhost:5000/register/${user?.email}`,
+        { params: { search } } // Pass search query as a parameter
       );
       setMarathons(response.data);
     } catch (error) {
-      console.error("Failed to fetch jobs:", error);
-      toast.error("Error fetching jobs.");
+      console.error("Failed to fetch marathons:", error);
+      toast.error("Error fetching marathons.");
     } finally {
       setLoading(false);
     }
@@ -35,8 +38,8 @@ const MyApplyList = () => {
       toast.success("Delete Successful");
       getData();
     } catch (error) {
-      console.error("Failed to delete job:", error);
-      toast.error("Error deleting job.");
+      console.error("Failed to delete marathon:", error);
+      toast.error("Error deleting marathon.");
     }
   };
 
@@ -50,6 +53,30 @@ const MyApplyList = () => {
 
   return (
     <div className="container mx-auto my-24">
+      {/* Search Box */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          getData();
+        }}
+      >
+        <div className="flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300 w-fit">
+          <input
+            className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search Marathon Title"
+            aria-label="Search Marathon Title"
+          />
+          <button
+            type="submit"
+            className="px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none"
+          >
+            Search
+          </button>
+        </div>
+      </form>
       <h1 className="text-3xl font-bold text-center my-6">
         My Applied Marathons
       </h1>
@@ -70,20 +97,23 @@ const MyApplyList = () => {
               <tr key={marathon._id}>
                 <td className="border px-4 py-2">{marathon.title}</td>
                 <td className="border px-4 py-2">
-                  {marathon.marathonStartDate}
+                  {new Date(marathon.marathonStartDate).toLocaleDateString()}
                 </td>
                 <td className="border px-4 py-2">{marathon.firstName}</td>
                 <td className="border px-4 py-2">{marathon.lastName}</td>
                 <td className="border px-4 py-2">{marathon.contactNumber}</td>
-                <td className="border px-4 py-2">
-                  <button className="bg-green-500 text-white px-3 py-1 rounded mr-2">
-                    Update
+                <td className="border border-gray-200 px-4 py-2">
+                  <button
+                    className="text-green-500 hover:text-green-700 mr-2"
+                    onClick={() => handleEdit(marathon)}
+                  >
+                    <FaEdit />
                   </button>
                   <button
-                    className="bg-red-500 text-white px-3 py-1 rounded"
+                    className="text-red-500 hover:text-red-700"
                     onClick={() => handleDelete(marathon._id)}
                   >
-                    Delete
+                    <FaTrash />
                   </button>
                 </td>
               </tr>
@@ -91,103 +121,6 @@ const MyApplyList = () => {
           </tbody>
         </table>
       </div>
-
-      {/* Update Modal */}
-      {/* {showUpdateModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <form
-            onSubmit={handleUpdate}
-            className="bg-white p-6 rounded shadow-lg w-96"
-          >
-            <h2 className="text-xl font-bold mb-4">Update Registration</h2>
-            <p>
-              <strong>Marathon Title:</strong> {selectedMarathon.title}
-            </p>
-            <p>
-              <strong>Start Date:</strong> {selectedMarathon.marathonStartDate}
-            </p>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                defaultValue={selectedMarathon.firstName}
-                className="w-full mt-1 p-2 border rounded"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                defaultValue={selectedMarathon.lastName}
-                className="w-full mt-1 p-2 border rounded"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">
-                Contact Number
-              </label>
-              <input
-                type="tel"
-                name="contactNumber"
-                defaultValue={selectedMarathon.contactNumber}
-                className="w-full mt-1 p-2 border rounded"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium">
-                Additional Info
-              </label>
-              <textarea
-                name="additionalInfo"
-                defaultValue={selectedMarathon.additionalInfo}
-                className="w-full mt-1 p-2 border rounded"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="bg-green-500 text-white px-4 py-2 rounded mr-2"
-            >
-              Save Changes
-            </button>
-            <button
-              type="button"
-              className="bg-gray-500 text-white px-4 py-2 rounded"
-              onClick={() => setShowUpdateModal(false)}
-            >
-              Cancel
-            </button>
-          </form>
-        </div>
-      )} */}
-
-      {/* Delete Confirmation Modal */}
-      {/* {showDeleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded shadow-lg w-96">
-            <h2 className="text-xl font-bold mb-4">Confirm Deletion</h2>
-            <p>Are you sure you want to delete this registration?</p>
-            <div className="flex justify-end mt-4">
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded mr-2"
-                onClick={handleDelete}
-              >
-                Delete
-              </button>
-              <button
-                className="bg-gray-500 text-white px-4 py-2 rounded"
-                onClick={() => setShowDeleteModal(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };
