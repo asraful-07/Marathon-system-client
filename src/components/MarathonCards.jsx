@@ -14,7 +14,14 @@ const MarathonCards = ({ marathon }) => {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
       {/* Marathon Image */}
-      <img src={image} alt={title} className="w-full h-64 object-cover" />
+      <div className="relative group">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-64 object-cover transition-transform duration-300 transform group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+      </div>
 
       <div className="p-4">
         {/* Marathon Title */}

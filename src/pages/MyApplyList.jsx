@@ -43,6 +43,18 @@ const MyApplyList = () => {
     }
   };
 
+  const handleEdit = (marathon) => {
+    // Implement your edit functionality here, e.g., open a modal or navigate to an edit page
+    console.log("Edit marathon:", marathon);
+    // Example: navigate to an edit page or show a modal for editing the marathon
+  };
+
+  // Handle Search
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.search.value);
+  };
+
   if (loading) {
     return (
       <div className="text-center mt-10">
@@ -54,20 +66,14 @@ const MyApplyList = () => {
   return (
     <div className="container mx-auto my-24">
       {/* Search Box */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          getData();
-        }}
-      >
-        <div className="flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300 w-fit">
+      <form onSubmit={handleSearch}>
+        <div className="flex p-1 w-fit overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
           <input
             className="px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent"
             type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search Marathon Title"
-            aria-label="Search Marathon Title"
+            name="search"
+            placeholder="Enter Job Title"
+            aria-label="Enter Job Title"
           />
           <button
             type="submit"
