@@ -3,18 +3,13 @@ import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import UpdateMarathon from "./UpdateMarathon";
+import EditMarathon from "./EditMarathon";
 
 const MyMarathonList = () => {
   const { user } = useContext(AuthContext);
+  const [selectedMarathon, setSelectedMarathon] = useState(null);
   const [marathons, setMarathons] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedMarathon, setSelectedMarathon] = useState(null);
-  useEffect(() => {
-    if (user) {
-      getData();
-    }
-  }, [user]);
 
   const getData = async () => {
     setLoading(true);
@@ -31,6 +26,12 @@ const MyMarathonList = () => {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      getData();
+    }
+  }, []);
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/marathon/${id}`);
@@ -45,7 +46,7 @@ const MyMarathonList = () => {
   // Handle modal open and passing selected marathon data
   const handleEdit = (marathon) => {
     setSelectedMarathon(marathon);
-    document.getElementById("my_modal_5").showModal();
+    document.getElementById("edit-marathon").showModal();
   };
 
   if (loading) {
@@ -62,6 +63,7 @@ const MyMarathonList = () => {
       <table className="table-auto w-full border-collapse border border-gray-200">
         <thead>
           <tr className="bg-gray-100">
+            <th className="border border-gray-200 px-4 py-2">Image</th>
             <th className="border border-gray-200 px-4 py-2">Title</th>
             <th className="border border-gray-200 px-4 py-2">
               Marathon Start Date
@@ -71,8 +73,15 @@ const MyMarathonList = () => {
           </tr>
         </thead>
         <tbody>
-          {marathons.map((marathon) => (
+          {marathons?.map((marathon) => (
             <tr key={marathon._id}>
+              <td className="border border-gray-200 px-4 py-2">
+                <img
+                  src={marathon.image}
+                  alt={marathon.title}
+                  className="w-20 h-20 object-cover rounded"
+                />
+              </td>
               <td className="border border-gray-200 px-4 py-2">
                 {marathon.title}
               </td>
@@ -102,20 +111,7 @@ const MyMarathonList = () => {
       </table>
 
       {/* Modal for updating marathon */}
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Update Marathon</h3>
-          {selectedMarathon && <UpdateMarathon marathon={selectedMarathon} />}
-          <div className="modal-action">
-            <button
-              className="btn"
-              onClick={() => document.getElementById("my_modal_5").close()}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </dialog>
+      <EditMarathon selectedMarathon={selectedMarathon || {}} />
     </div>
   );
 };

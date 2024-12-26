@@ -3,25 +3,36 @@ import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 import toast from "react-hot-toast";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const MyApplyList = () => {
   const { user } = useContext(AuthContext);
   const [marathons, setMarathons] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState(""); // State for search input
+  const [search, setSearch] = useState("");
+  const [selectedMarathon, setSelectedMarathon] = useState(null);
+
+  const [marathonStartDate, setMarathonStartDate] = useState(
+    selectedMarathon?.marathonStartDate
+      ? new Date(selectedMarathon?.marathonStartDate)
+      : new Date()
+  );
 
   useEffect(() => {
-    if (user) {
-      getData();
-    }
-  }, [user, search]); // Refetch data when search changes
+    setMarathonStartDate(
+      selectedMarathon?.marathonStartDate
+        ? new Date(selectedMarathon?.marathonStartDate)
+        : new Date()
+    );
+  }, [selectedMarathon]);
 
   const getData = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
         `http://localhost:5000/register/${user?.email}`,
-        { params: { search } } // Pass search query as a parameter
+        { params: { search } }
       );
       setMarathons(response.data);
     } catch (error) {
@@ -29,6 +40,42 @@ const MyApplyList = () => {
       toast.error("Error fetching marathons.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      getData();
+    }
+  }, [user, search]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const updatedTitle = form.title.value;
+    const updatedFirstName = form.firstName.value;
+    const updatedLastName = form.lastName.value;
+    const updatedContactNumber = form.contactNumber.value;
+
+    const marathonRegisterData = {
+      title: updatedTitle,
+      marathonStartDate: marathonStartDate,
+      firstName: updatedFirstName,
+      lastName: updatedLastName,
+      contactNumber: updatedContactNumber,
+    };
+
+    try {
+      const { data } = await axios.put(
+        `http://localhost:5000/register/${selectedMarathon?._id}`,
+        marathonRegisterData
+      );
+
+      toast.success("Marathon Event Updated Successfully!");
+      document.getElementById("edit-marathon").close();
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update marathon event.");
     }
   };
 
@@ -44,9 +91,8 @@ const MyApplyList = () => {
   };
 
   const handleEdit = (marathon) => {
-    // Implement your edit functionality here, e.g., open a modal or navigate to an edit page
-    console.log("Edit marathon:", marathon);
-    // Example: navigate to an edit page or show a modal for editing the marathon
+    setSelectedMarathon(marathon);
+    document.getElementById("edit-marathon").showModal();
   };
 
   // Handle Search
@@ -127,6 +173,92 @@ const MyApplyList = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Modal for updating marathon */}
+      <dialog id="edit-marathon" className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h1 className="text-3xl font-bold text-center mb-6">
+            Update My Apply List
+          </h1>
+          <div className="modal-action flex-col" method="dialog">
+            <form onSubmit={handleSubmit} method="dialog">
+              <div className="mb-4">
+                <label className="block text-lg font-medium">
+                  Marathon Title
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  className="w-full mt-2 px-4 py-2 border rounded"
+                  defaultValue={selectedMarathon?.title}
+                  readOnly
+                  required
+                />
+              </div>
+
+              {/* Marathon Start Date */}
+              <div className="mb-4">
+                <label className="block text-lg font-medium">
+                  Marathon Start Date
+                </label>
+                <DatePicker
+                  selected={marathonStartDate}
+                  onChange={(date) => setMarathonStartDate(date)}
+                  className="w-full mt-2 px-4 py-2 border rounded"
+                  required
+                  readOnly
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg font-medium">FirstName</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  className="w-full mt-2 px-4 py-2 border rounded"
+                  defaultValue={selectedMarathon?.firstName}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg font-medium">LastName</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  className="w-full mt-2 px-4 py-2 border rounded"
+                  defaultValue={selectedMarathon?.lastName}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg font-medium">
+                  ContactNumber
+                </label>
+                <input
+                  type="text"
+                  name="contactNumber"
+                  className="w-full mt-2 px-4 py-2 border rounded"
+                  defaultValue={selectedMarathon?.contactNumber}
+                  required
+                />
+              </div>
+
+              {/* if there is a button in form, it will close the modal */}
+              <button
+                type="submit"
+                className="w-full my-4 py-3 bg-[#0db496] text-white text-xl font-bold rounded"
+              >
+                Update Marathon
+              </button>
+            </form>
+            <button
+              onClick={() => document.getElementById("edit-marathon").close()}
+              className="btn"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

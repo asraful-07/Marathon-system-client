@@ -50,7 +50,6 @@ const routes = createBrowserRouter([
           </PrivetRouter>
         ),
       },
-
       {
         path: "/dashboard/my-marathon-list",
         element: (
@@ -66,12 +65,6 @@ const routes = createBrowserRouter([
             <MyApplyList />
           </PrivetRouter>
         ),
-      },
-      {
-        path: "/update/:id",
-        element: <UpdateMarathon />,
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/marathon/${params.id}`),
       },
       {
         path: "/marathon/:id",

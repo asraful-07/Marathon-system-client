@@ -41,7 +41,7 @@ const AddMarathon = () => {
     };
 
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         `http://localhost:5000/marathons`,
         marathonData
       );
@@ -106,7 +106,6 @@ const AddMarathon = () => {
             selected={endDate}
             onChange={(date) => setEndDate(date)}
             className="w-full mt-2 px-4 py-2 border rounded"
-            dateFormat="MMMM d, yyyy"
             required
           />
         </div>
@@ -120,8 +119,6 @@ const AddMarathon = () => {
             selected={marathonStartDate}
             onChange={(date) => setMarathonStartDate(date)}
             className="w-full mt-2 px-4 py-2 border rounded"
-            dateFormat="MMMM d, yyyy"
-            required
           />
         </div>
 
@@ -132,7 +129,6 @@ const AddMarathon = () => {
             type="text"
             name="location"
             className="w-full mt-2 px-4 py-2 border rounded"
-            required
           />
         </div>
 

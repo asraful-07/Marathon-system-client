@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 
 const MarathonDetails = () => {
   const { user } = useContext(AuthContext);
-  const [startDate, setStartDate] = useState(new Date());
   const marathon = useLoaderData();
   const {
     _id,
@@ -19,6 +18,7 @@ const MarathonDetails = () => {
     totalRegistrations,
     marathonStartDate,
   } = marathon;
+  const [startDate, setStartDate] = useState(new Date(marathonStartDate));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
