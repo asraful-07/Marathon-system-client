@@ -68,7 +68,7 @@ const EditMarathon = ({ selectedMarathon, getData }) => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/marathon/${selectedMarathon?._id}`,
+        `https://marathon-server-ashen.vercel.app/marathon/${selectedMarathon?._id}`,
         marathonData
       );
 
@@ -173,8 +173,7 @@ const EditMarathon = ({ selectedMarathon, getData }) => {
                 </label>
                 <select
                   name="runningDistance"
-                  // selected={runningDistance}
-                  defaultValue={selectedMarathon?.runningDistance}
+                  defaultValue={runningDistance}
                   onChange={(e) => setRunningDistance(e.target.value)}
                   className="w-full mt-2 px-4 py-2 border rounded"
                   required

@@ -9,7 +9,7 @@ const Marathons = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios(
-        `http://localhost:5000/marathons?sort=${sortOrder}`
+        `https://marathon-server-ashen.vercel.app/marathons?sort=${sortOrder}`
       );
       setMarathons(data);
     };

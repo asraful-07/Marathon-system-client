@@ -11,6 +11,7 @@ import MarathonDetails from "../components/MarathonDetails";
 import ErrorPage from "../pages/ErrorPage";
 import PrivetRouter from "../PrivetRouter/PrivetRouter";
 import DashboardLayout from "../layout/DashboardLayout";
+import DashboardHome from "../pages/DashboardHome";
 
 const routes = createBrowserRouter([
   {
@@ -45,7 +46,9 @@ const routes = createBrowserRouter([
           </PrivetRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/marathon/${params.id}`),
+          fetch(
+            `https://marathon-server-ashen.vercel.app/marathon/${params.id}`
+          ),
       },
       {
         path: "*",
@@ -53,12 +56,12 @@ const routes = createBrowserRouter([
       },
       // dashboard routes
       {
-        path: "dashboard",
+        path: "/dashboard",
         element: <DashboardLayout />,
         children: [
           {
-            path: "dashboard",
-            element: <div>This is home page </div>,
+            path: "/dashboard",
+            element: <DashboardHome />,
           },
           {
             path: "add-marathon",

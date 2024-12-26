@@ -4,6 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const MarathonDetails = () => {
   const { user } = useContext(AuthContext);
@@ -41,7 +42,7 @@ const MarathonDetails = () => {
 
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/register`,
+        `https://marathon-server-ashen.vercel.app/register`,
         registrationData
       );
       toast.success("Registration Successful!");
@@ -51,6 +52,8 @@ const MarathonDetails = () => {
       toast.error(err.response?.data || "An error occurred");
     }
   };
+
+  const marathonStartDateObj = new Date(marathonStartDate);
 
   return (
     <div className="flex flex-wrap items-center container mx-auto">
@@ -72,6 +75,30 @@ const MarathonDetails = () => {
         <p>
           <strong>Total Registrations:</strong> {totalRegistrations}
         </p>
+        <div className="mt-6">
+          <h3 className="text-xl font-semibold">Time Until Marathon Starts:</h3>
+          <CountdownCircleTimer
+            isPlaying
+            duration={Math.floor((marathonStartDateObj - new Date()) / 1000)}
+            colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+            colorsTime={[7, 5, 2, 0]}
+            strokeWidth={6}
+            size={120}
+          >
+            {({ remainingTime }) => {
+              const days = Math.floor(remainingTime / 86400);
+              const hours = Math.floor((remainingTime % 86400) / 3600);
+              const minutes = Math.floor((remainingTime % 3600) / 60);
+              return (
+                <div>
+                  <p>{days} Days</p>
+                  <p>{hours} Hours</p>
+                  <p>{minutes} Minutes</p>
+                </div>
+              );
+            }}
+          </CountdownCircleTimer>
+        </div>
       </div>
       <div className="p-6 w-full md:w-1/2">
         <h1 className="text-3xl font-bold text-center mb-6">

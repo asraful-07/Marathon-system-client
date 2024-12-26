@@ -15,7 +15,10 @@ const MyMarathonList = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/marathons/${user?.email}`
+        `https://marathon-server-ashen.vercel.app/marathons/${user?.email}`,
+        {
+          withCredentials: true,
+        }
       );
       setMarathons(response.data);
     } catch (error) {
@@ -34,7 +37,9 @@ const MyMarathonList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/marathon/${id}`);
+      await axios.delete(
+        `https://marathon-server-ashen.vercel.app/marathon/${id}`
+      );
       toast.success("Delete Successful");
       getData();
     } catch (error) {
