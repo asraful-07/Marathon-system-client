@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
 
-const EditMarathon = ({ selectedMarathon }) => {
+const EditMarathon = ({ selectedMarathon, getData }) => {
   const [startDate, setStartDate] = useState(
     selectedMarathon?.startRegistrationDate
       ? new Date(selectedMarathon?.startRegistrationDate)
@@ -72,6 +72,7 @@ const EditMarathon = ({ selectedMarathon }) => {
         marathonData
       );
 
+      getData();
       toast.success("Marathon Event Updated Successfully!");
       document.getElementById("edit-marathon").close();
     } catch (err) {
@@ -172,6 +173,7 @@ const EditMarathon = ({ selectedMarathon }) => {
                 </label>
                 <select
                   name="runningDistance"
+                  // selected={runningDistance}
                   defaultValue={selectedMarathon?.runningDistance}
                   onChange={(e) => setRunningDistance(e.target.value)}
                   className="w-full mt-2 px-4 py-2 border rounded"

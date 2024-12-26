@@ -15,10 +15,14 @@ const MarathonDetails = () => {
     startRegistrationDate,
     endRegistrationDate,
     description,
-    totalRegistrations,
+    totalRegistrations: initialTotalRegistrations,
     marathonStartDate,
   } = marathon;
+
   const [startDate, setStartDate] = useState(new Date(marathonStartDate));
+  const [totalRegistrations, setTotalRegistrations] = useState(
+    initialTotalRegistrations
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +45,7 @@ const MarathonDetails = () => {
         registrationData
       );
       toast.success("Registration Successful!");
+      setTotalRegistrations((prev) => prev + 1);
       form.reset();
     } catch (err) {
       toast.error(err.response?.data || "An error occurred");

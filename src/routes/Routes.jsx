@@ -2,16 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home";
 import Marathons from "../components/Marathons";
-import Dashboard from "../components/Dashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AddMarathon from "../pages/AddMarathon";
 import MyMarathonList from "../pages/MyMarathonList";
 import MyApplyList from "../pages/MyApplyList";
 import MarathonDetails from "../components/MarathonDetails";
-import UpdateMarathon from "../pages/UpdateMarathon";
 import ErrorPage from "../pages/ErrorPage";
 import PrivetRouter from "../PrivetRouter/PrivetRouter";
+import DashboardLayout from "../layout/DashboardLayout";
 
 const routes = createBrowserRouter([
   {
@@ -31,40 +30,12 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
         path: "/login",
         element: <Login />,
       },
       {
         path: "/register",
         element: <Register />,
-      },
-      {
-        path: "/dashboard/add-marathon",
-        element: (
-          <PrivetRouter>
-            <AddMarathon />
-          </PrivetRouter>
-        ),
-      },
-      {
-        path: "/dashboard/my-marathon-list",
-        element: (
-          <PrivetRouter>
-            <MyMarathonList />
-          </PrivetRouter>
-        ),
-      },
-      {
-        path: "/dashboard/my-apply-list",
-        element: (
-          <PrivetRouter>
-            <MyApplyList />
-          </PrivetRouter>
-        ),
       },
       {
         path: "/marathon/:id",
@@ -79,6 +50,41 @@ const routes = createBrowserRouter([
       {
         path: "*",
         element: <ErrorPage />,
+      },
+      // dashboard routes
+      {
+        path: "dashboard",
+        element: <DashboardLayout />,
+        children: [
+          {
+            path: "dashboard",
+            element: <div>This is home page </div>,
+          },
+          {
+            path: "add-marathon",
+            element: (
+              <PrivetRouter>
+                <AddMarathon />
+              </PrivetRouter>
+            ),
+          },
+          {
+            path: "my-marathon-list",
+            element: (
+              <PrivetRouter>
+                <MyMarathonList />
+              </PrivetRouter>
+            ),
+          },
+          {
+            path: "my-apply-list",
+            element: (
+              <PrivetRouter>
+                <MyApplyList />
+              </PrivetRouter>
+            ),
+          },
+        ],
       },
     ],
   },

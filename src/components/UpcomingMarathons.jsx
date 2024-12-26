@@ -24,7 +24,7 @@ const events = [
 const UpcomingMarathons = () => {
   return (
     <div
-      className="relative bg-cover bg-center h-screen mb-24 flex items-center justify-center"
+      className="relative bg-cover bg-center h-screen my-24 flex items-center justify-center"
       style={{
         backgroundImage:
           "url('https://runcrew.ancorathemes.com/wp-content/uploads/2016/03/home1_bg1.jpg?id=2167')",

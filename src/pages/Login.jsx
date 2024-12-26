@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-// import Lottie from "lottie-react";
-// import loginAnimation from "../assets/loginAnimation.json";
+import Lottie from "lottie-react";
+import loginAnimation from "../assets/Lottie.json";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
@@ -54,9 +54,9 @@ const Login = () => {
   return (
     <div className="hero">
       <div className="hero-content flex-col lg:flex-row justify-between">
-        {/* <div>
+        <div>
           <Lottie animationData={loginAnimation} loop={true} />
-        </div> */}
+        </div>
         <div className="card bg-base-100 w-full max-w-2xl shrink-0 shadow-2xl p-6">
           <form onSubmit={handleLoginSubmit} className="card-body">
             <h1 className="text-3xl font-semibold text-center mb-6">

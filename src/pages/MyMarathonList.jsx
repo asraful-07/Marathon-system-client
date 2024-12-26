@@ -111,7 +111,10 @@ const MyMarathonList = () => {
       </table>
 
       {/* Modal for updating marathon */}
-      <EditMarathon selectedMarathon={selectedMarathon || {}} />
+      <EditMarathon
+        selectedMarathon={selectedMarathon || {}}
+        getData={getData}
+      />
     </div>
   );
 };

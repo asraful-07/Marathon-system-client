@@ -71,6 +71,7 @@ const MyApplyList = () => {
         marathonRegisterData
       );
 
+      getData();
       toast.success("Marathon Event Updated Successfully!");
       document.getElementById("edit-marathon").close();
     } catch (err) {

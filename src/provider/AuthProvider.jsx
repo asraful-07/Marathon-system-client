@@ -72,7 +72,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      console.log("state captured", currentUser?.email);
 
       if (currentUser?.email) {
         const user = { email: currentUser.email };
@@ -81,7 +80,6 @@ const AuthProvider = ({ children }) => {
           const response = await axios.post("http://localhost:5000/jwt", user, {
             withCredentials: true,
           });
-          console.log("login token", response.data);
         } catch (error) {
           console.error("Error fetching login token:", error);
         } finally {
@@ -94,7 +92,6 @@ const AuthProvider = ({ children }) => {
             {},
             { withCredentials: true }
           );
-          console.log("logout", response.data);
         } catch (error) {
           console.error("Error during logout:", error);
         } finally {
