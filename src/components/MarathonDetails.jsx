@@ -42,7 +42,7 @@ const MarathonDetails = () => {
 
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/register`,
+        `https://marathon-server-ashen.vercel.app/register`,
         registrationData
       );
       toast.success("Registration Successful!");

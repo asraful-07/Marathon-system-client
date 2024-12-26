@@ -46,7 +46,9 @@ const routes = createBrowserRouter([
           </PrivetRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/marathon/${params.id}`),
+          fetch(
+            `https://marathon-server-ashen.vercel.app/marathon/${params.id}`
+          ),
       },
       {
         path: "*",

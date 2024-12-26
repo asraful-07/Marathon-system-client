@@ -68,7 +68,7 @@ const EditMarathon = ({ selectedMarathon, getData }) => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/marathon/${selectedMarathon?._id}`,
+        `https://marathon-server-ashen.vercel.app/marathon/${selectedMarathon?._id}`,
         marathonData
       );
 

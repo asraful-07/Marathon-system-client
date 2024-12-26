@@ -42,7 +42,7 @@ const AddMarathon = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/marathons`,
+        `https://marathon-server-ashen.vercel.app/marathons`,
         marathonData
       );
       toast.success("Marathon Event Created Successfully!");
