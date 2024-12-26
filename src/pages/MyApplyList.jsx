@@ -31,7 +31,7 @@ const MyApplyList = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://marathon-server-ashen.vercel.app/register/${user?.email}`,
+        `http://localhost:5000/register/${user?.email}`,
         {
           withCredentials: true,
         },
@@ -70,7 +70,7 @@ const MyApplyList = () => {
 
     try {
       const { data } = await axios.put(
-        `https://marathon-server-ashen.vercel.app/register/${selectedMarathon?._id}`,
+        `http://localhost:5000/register/${selectedMarathon?._id}`,
         marathonRegisterData
       );
 
@@ -85,9 +85,7 @@ const MyApplyList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://marathon-server-ashen.vercel.app/register/${id}`
-      );
+      await axios.delete(`http://localhost:5000/register/${id}`);
       toast.success("Delete Successful");
       getData();
     } catch (error) {

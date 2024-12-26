@@ -77,13 +77,9 @@ const AuthProvider = ({ children }) => {
         const user = { email: currentUser.email };
 
         try {
-          const response = await axios.post(
-            "https://marathon-server-ashen.vercel.app/jwt",
-            user,
-            {
-              withCredentials: true,
-            }
-          );
+          const response = await axios.post("http://localhost:5000/jwt", user, {
+            withCredentials: true,
+          });
         } catch (error) {
           console.error("Error fetching login token:", error);
         } finally {
@@ -92,7 +88,7 @@ const AuthProvider = ({ children }) => {
       } else {
         try {
           const response = await axios.post(
-            "https://marathon-server-ashen.vercel.app/logout",
+            "http://localhost:5000/logout",
             {},
             { withCredentials: true }
           );
