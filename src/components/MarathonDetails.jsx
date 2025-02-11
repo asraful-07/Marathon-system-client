@@ -108,29 +108,36 @@ const MarathonDetails = () => {
           onSubmit={handleSubmit}
           className="bg-white p-6 rounded shadow-lg"
         >
-          <div className="mb-4">
-            <label htmlFor="emailAddress" className="block text-lg font-medium">
-              Email
-            </label>
-            <input
-              id="emailAddress"
-              type="email"
-              name="email"
-              disabled
-              defaultValue={user?.email}
-              readOnly
-              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-lg font-medium">Marathon Title</label>
-            <input
-              type="text"
-              name="marathonTitle"
-              defaultValue={title}
-              className="w-full px-4 py-2 mt-2 border rounded"
-              readOnly
-            />
+          <div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
+            <div className="mb-4">
+              <label className="block text-lg font-medium">
+                Marathon Title
+              </label>
+              <input
+                type="text"
+                name="marathonTitle"
+                defaultValue={title}
+                className="w-full px-4 py-2 mt-2 border rounded"
+                readOnly
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="emailAddress"
+                className="block text-lg font-medium"
+              >
+                Email
+              </label>
+              <input
+                id="emailAddress"
+                type="email"
+                name="email"
+                disabled
+                defaultValue={user?.email}
+                readOnly
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:ring"
+              />
+            </div>
           </div>
           <div className="mb-4">
             <label className="block text-lg font-medium">
@@ -143,24 +150,27 @@ const MarathonDetails = () => {
               readOnly
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-lg font-medium">First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              className="w-full px-4 py-2 mt-2 border rounded"
-              required
-            />
+          <div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
+            <div className="mb-4">
+              <label className="block text-lg font-medium">First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                className="w-full px-4 py-2 mt-2 border rounded"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg font-medium">Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                className="w-full px-4 py-2 mt-2 border rounded"
+                required
+              />
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-lg font-medium">Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              className="w-full px-4 py-2 mt-2 border rounded"
-              required
-            />
-          </div>
+
           <div className="mb-4">
             <label className="block text-lg font-medium">Contact Number</label>
             <input
