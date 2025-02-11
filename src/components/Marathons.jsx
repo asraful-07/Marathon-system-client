@@ -19,7 +19,7 @@ const Marathons = () => {
   return (
     <div>
       {/* Sorting Options */}
-      <div className="flex justify-start mt-24 container mx-auto">
+      <div className="flex justify-end mt-24 container mx-auto">
         <label className="mr-2">Sort by:</label>
         <select
           value={sortOrder}
