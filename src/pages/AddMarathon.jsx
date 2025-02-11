@@ -85,7 +85,7 @@ const AddMarathon = () => {
           />
         </div>
 
-        <div className=" grid gap-4 grid-cols-1 lg:grid-cols-2">
+        <div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
           {/* Start Registration Date */}
           <div className="mb-4">
             <label className="block text-lg font-medium">
@@ -112,26 +112,28 @@ const AddMarathon = () => {
           </div>
         </div>
 
-        {/* Marathon Start Date */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium">
-            Marathon Start Date
-          </label>
-          <DatePicker
-            selected={marathonStartDate}
-            onChange={(date) => setMarathonStartDate(date)}
-            className="w-full mt-2 px-4 py-2 border rounded"
-          />
-        </div>
+        <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
+          {/* Marathon Start Date */}
+          <div className="mb-4">
+            <label className="block text-lg font-medium">
+              Marathon Start Date
+            </label>
+            <DatePicker
+              selected={marathonStartDate}
+              onChange={(date) => setMarathonStartDate(date)}
+              className="w-full mt-2 px-4 py-2 border rounded"
+            />
+          </div>
 
-        {/* Location */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium">Location</label>
-          <input
-            type="text"
-            name="location"
-            className="w-full mt-2 px-4 py-2 border rounded"
-          />
+          {/* Location */}
+          <div className="mb-4">
+            <label className="block text-lg font-medium">Location</label>
+            <input
+              type="text"
+              name="location"
+              className="w-full mt-2 px-4 py-2 border rounded"
+            />
+          </div>
         </div>
 
         {/* Running Distance */}

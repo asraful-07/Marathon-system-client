@@ -116,7 +116,7 @@ const EditMarathon = ({ selectedMarathon, getData }) => {
                 />
               </div>
 
-              <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
+              <div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
                 {/* Start Registration Date */}
                 <div className="mb-4">
                   <label className="block text-lg font-medium">
