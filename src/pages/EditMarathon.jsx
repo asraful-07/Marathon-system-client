@@ -116,29 +116,31 @@ const EditMarathon = ({ selectedMarathon, getData }) => {
                 />
               </div>
 
-              {/* Start Registration Date */}
-              <div className="mb-4">
-                <label className="block text-lg font-medium">
-                  Start Registration Date
-                </label>
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  className="border p-2 rounded-md"
-                />
-              </div>
+              <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
+                {/* Start Registration Date */}
+                <div className="mb-4">
+                  <label className="block text-lg font-medium">
+                    Start Registration Date
+                  </label>
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    className="border p-2 rounded-md"
+                  />
+                </div>
 
-              {/* End Registration Date */}
-              <div className="mb-4">
-                <label className="block text-lg font-medium">
-                  End Registration Date
-                </label>
-                <DatePicker
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                  className="w-full mt-2 px-4 py-2 border rounded"
-                  required
-                />
+                {/* End Registration Date */}
+                <div className="mb-4">
+                  <label className="block text-lg font-medium">
+                    End Registration Date
+                  </label>
+                  <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    className="w-full mt-2 px-4 py-2 border rounded"
+                    required
+                  />
+                </div>
               </div>
 
               {/* Marathon Start Date */}
