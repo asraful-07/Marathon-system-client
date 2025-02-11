@@ -143,29 +143,31 @@ const EditMarathon = ({ selectedMarathon, getData }) => {
                 </div>
               </div>
 
-              {/* Marathon Start Date */}
-              <div className="mb-4">
-                <label className="block text-lg font-medium">
-                  Marathon Start Date
-                </label>
-                <DatePicker
-                  selected={marathonStartDate}
-                  onChange={(date) => setMarathonStartDate(date)}
-                  className="w-full mt-2 px-4 py-2 border rounded"
-                  required
-                />
-              </div>
+              <div className="grid gap-2 grid-cols-1 lg:grid-cols-2">
+                {/* Marathon Start Date */}
+                <div className="mb-4">
+                  <label className="block text-lg font-medium">
+                    Marathon Start Date
+                  </label>
+                  <DatePicker
+                    selected={marathonStartDate}
+                    onChange={(date) => setMarathonStartDate(date)}
+                    className="w-full mt-2 px-4 py-2 border rounded"
+                    required
+                  />
+                </div>
 
-              {/* Location */}
-              <div className="mb-4">
-                <label className="block text-lg font-medium">Location</label>
-                <input
-                  type="text"
-                  name="location"
-                  defaultValue={selectedMarathon?.location}
-                  className="w-full mt-2 px-4 py-2 border rounded"
-                  required
-                />
+                {/* Location */}
+                <div className="mb-4">
+                  <label className="block text-lg font-medium">Location</label>
+                  <input
+                    type="text"
+                    name="location"
+                    defaultValue={selectedMarathon?.location}
+                    className="w-full mt-2 px-4 py-2 border rounded"
+                    required
+                  />
+                </div>
               </div>
 
               {/* Running Distance */}
